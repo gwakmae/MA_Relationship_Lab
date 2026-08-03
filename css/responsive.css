@@ -1,0 +1,228 @@
+@media (max-width: 980px) {
+    #app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+
+        width: 100%;
+        height: auto;
+        padding: 12px 18px;
+
+        flex-direction: row;
+        align-items: center;
+        gap: 18px;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        margin: 0 auto 0 0;
+        padding: 0;
+    }
+
+    .brand span,
+    .sidebar-note {
+        display: none;
+    }
+
+    .main-nav {
+        display: flex;
+        gap: 5px;
+    }
+
+    .nav-item {
+        width: auto;
+        padding: 9px 11px;
+    }
+
+    .nav-icon {
+        display: none;
+    }
+
+    .workspace {
+        padding:
+            30px
+            clamp(18px, 4vw, 40px)
+            24px;
+    }
+}
+
+@media (max-width: 760px) {
+    .topbar {
+        display: block;
+    }
+
+    .formula-pill {
+        display: none;
+    }
+
+    .converter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .converter-arrow {
+        height: 44px;
+    }
+
+    .arrow-circle {
+        width: 42px;
+        height: 42px;
+
+        transform: rotate(90deg);
+    }
+
+    .quiz-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-panel {
+        display: grid;
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 8px;
+    }
+
+    .stats-panel h3,
+    .reset-button {
+        grid-column: 1 / -1;
+    }
+
+    .stat-row {
+        display: block;
+        padding: 12px;
+
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        text-align: center;
+    }
+
+    .stat-row strong {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .atlas-intro {
+        display: block;
+    }
+
+    .atlas-actions {
+        margin-top: 17px;
+    }
+
+    .atlas-action-button {
+        flex: 1;
+    }
+
+    .atlas-svg {
+        width: 1080px;
+        min-width: 1080px;
+    }
+
+    .atlas-family-details {
+        padding: 18px;
+    }
+
+    .atlas-detail-header {
+        align-items: flex-start;
+    }
+
+    .atlas-family-count {
+        min-width: 78px;
+    }
+
+    .atlas-family-item {
+        flex-basis: 104px;
+    }
+}
+
+@media (max-width: 520px) {
+    .sidebar {
+        padding: 10px 12px;
+    }
+
+    .brand strong {
+        font-size: 14px;
+    }
+
+    .brand-mark {
+        width: 36px;
+        height: 36px;
+    }
+
+    .nav-item {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    .workspace {
+        padding: 24px 14px;
+    }
+
+    .ma-grid {
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr));
+
+        gap: 5px;
+    }
+
+    .ma-button {
+        font-size: 12px;
+    }
+
+    .answer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-panel {
+        padding: 18px;
+    }
+
+    .atlas-intro h2 {
+        font-size: 22px;
+    }
+
+    .atlas-intro > div > p:last-child {
+        font-size: 13px;
+    }
+
+    .atlas-axis-title {
+        padding: 13px 14px;
+    }
+
+    .atlas-axis-title span {
+        display: none;
+    }
+
+    .atlas-legend {
+        gap: 10px;
+    }
+
+    .atlas-detail-header h2 {
+        font-size: 20px;
+    }
+
+    .atlas-family-count strong {
+        font-size: 20px;
+    }
+
+    .atlas-family-chain {
+        padding-bottom: 6px;
+    }
+
+    .toast-container {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+    }
+
+    .toast {
+        text-align: center;
+    }
+}

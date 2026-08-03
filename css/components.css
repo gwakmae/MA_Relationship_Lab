@@ -1,0 +1,1082 @@
+/* ======================================================
+   공통 패널
+   ====================================================== */
+
+.panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.018)
+        );
+
+    box-shadow: var(--shadow);
+}
+
+.panel-label {
+    margin-bottom: 20px;
+
+    color: var(--text-3);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.field {
+    margin-bottom: 22px;
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.field > label {
+    display: block;
+    margin-bottom: 9px;
+
+    color: var(--text-2);
+
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.select-control {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+
+    color: var(--text);
+    background: var(--surface-2);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.select-control:hover {
+    border-color: var(--border-strong);
+}
+
+/* ======================================================
+   MA 선택 버튼
+   ====================================================== */
+
+.ma-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+}
+
+.ma-button {
+    min-height: 40px;
+    padding: 7px 4px;
+
+    color: var(--text-2);
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        color 160ms var(--ease),
+        background 160ms var(--ease),
+        border-color 160ms var(--ease),
+        transform 160ms var(--ease);
+}
+
+.ma-button:hover {
+    color: white;
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+}
+
+.ma-button.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #7065e8
+        );
+
+    border-color: transparent;
+
+    box-shadow:
+        0 8px 22px
+        rgba(91, 140, 255, 0.25);
+}
+
+/* ======================================================
+   환산기
+   ====================================================== */
+
+.converter-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        74px
+        minmax(0, 1fr);
+
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-panel {
+    padding: 26px;
+}
+
+.converter-arrow {
+    display: grid;
+    place-items: center;
+}
+
+.arrow-circle {
+    width: 54px;
+    height: 54px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--cyan);
+    background:
+        rgba(85, 216, 255, 0.08);
+
+    border:
+        1px solid
+        rgba(85, 216, 255, 0.22);
+
+    border-radius: 50%;
+
+    font-size: 24px;
+}
+
+.result-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-value {
+    margin: 18px 0 10px;
+
+    color: white;
+
+    font-size:
+        clamp(42px, 7vw, 72px);
+
+    font-weight: 850;
+    letter-spacing: -0.065em;
+}
+
+.result-value span {
+    margin-left: 6px;
+
+    color: var(--text-2);
+
+    font-size: 0.38em;
+    letter-spacing: 0;
+}
+
+.result-status {
+    width: fit-content;
+    padding: 7px 10px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.result-status.supported {
+    color: var(--green);
+    background:
+        rgba(65, 214, 149, 0.1);
+
+    border:
+        1px solid
+        rgba(65, 214, 149, 0.22);
+}
+
+.result-status.unsupported {
+    color: var(--orange);
+    background:
+        rgba(255, 173, 90, 0.1);
+
+    border:
+        1px solid
+        rgba(255, 173, 90, 0.22);
+}
+
+.result-equation {
+    margin-top: 22px;
+    padding: 14px;
+
+    color: var(--text-2);
+    background: rgba(0, 0, 0, 0.2);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.result-equation strong {
+    color: var(--cyan);
+}
+
+.helper-card {
+    margin-top: 18px;
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    color: var(--text-2);
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.helper-icon {
+    flex: 0 0 auto;
+
+    color: var(--orange);
+    font-weight: 900;
+}
+
+/* ======================================================
+   퀴즈
+   ====================================================== */
+
+.quiz-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        240px;
+
+    gap: 18px;
+}
+
+.quiz-card {
+    padding:
+        clamp(24px, 5vw, 46px);
+}
+
+.quiz-kicker {
+    margin-bottom: 18px;
+
+    color: var(--blue-2);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.quiz-question {
+    margin-bottom: 30px;
+
+    font-size:
+        clamp(24px, 4vw, 38px);
+
+    line-height: 1.35;
+    letter-spacing: -0.04em;
+}
+
+.quiz-question strong {
+    color: var(--cyan);
+}
+
+.answer-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.answer-button {
+    min-height: 62px;
+
+    color: var(--text);
+    background: var(--surface-2);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    font-size: 17px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform 160ms var(--ease),
+        border-color 160ms var(--ease),
+        background 160ms var(--ease);
+}
+
+.answer-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(91, 140, 255, 0.55);
+}
+
+.answer-button.correct {
+    color: var(--green);
+    background:
+        rgba(65, 214, 149, 0.1);
+
+    border-color:
+        rgba(65, 214, 149, 0.5);
+}
+
+.answer-button.wrong {
+    color: var(--red);
+    background:
+        rgba(255, 107, 120, 0.1);
+
+    border-color:
+        rgba(255, 107, 120, 0.5);
+}
+
+.quiz-feedback {
+    min-height: 52px;
+    margin-top: 20px;
+
+    color: var(--text-2);
+
+    line-height: 1.55;
+}
+
+.quiz-feedback strong {
+    color: white;
+}
+
+.next-button {
+    width: 100%;
+    min-height: 48px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--purple)
+        );
+
+    border: 0;
+    border-radius: 12px;
+
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.stats-panel {
+    height: fit-content;
+    padding: 22px;
+}
+
+.stats-panel h3 {
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+.stat-row {
+    padding: 12px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: var(--text-2);
+
+    border-bottom: 1px solid var(--border);
+
+    font-size: 13px;
+}
+
+.stat-row:last-of-type {
+    border-bottom: 0;
+}
+
+.stat-row strong {
+    color: white;
+    font-size: 18px;
+}
+
+.reset-button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 10px;
+
+    color: var(--text-3);
+    background: transparent;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+/* ======================================================
+   토스트
+   ====================================================== */
+
+.toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+
+    display: grid;
+    gap: 8px;
+}
+
+.toast {
+    padding: 12px 16px;
+
+    color: white;
+    background:
+        rgba(22, 26, 35, 0.95);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: var(--shadow);
+
+    animation:
+        toast-in 260ms var(--ease);
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================================================
+   MA Relationship Atlas
+   ====================================================== */
+
+.atlas-intro {
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.atlas-intro h2 {
+    max-width: 720px;
+    margin-bottom: 9px;
+
+    font-size:
+        clamp(22px, 3vw, 32px);
+
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+}
+
+.atlas-intro > div > p:last-child {
+    margin-bottom: 0;
+
+    color: var(--text-2);
+
+    line-height: 1.6;
+}
+
+.atlas-actions {
+    flex: 0 0 auto;
+
+    display: flex;
+    gap: 8px;
+}
+
+.atlas-action-button {
+    min-height: 40px;
+    padding: 0 14px;
+
+    color: var(--text-2);
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    transition:
+        color 160ms var(--ease),
+        background 160ms var(--ease),
+        border-color 160ms var(--ease),
+        transform 160ms var(--ease);
+}
+
+.atlas-action-button:hover {
+    color: white;
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+}
+
+.atlas-action-button.primary {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91, 140, 255, 0.85),
+            rgba(169, 124, 255, 0.8)
+        );
+
+    border-color: transparent;
+}
+
+.atlas-panel {
+    overflow: hidden;
+}
+
+.atlas-axis-title {
+    padding: 17px 20px 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    color: var(--text-2);
+
+    border-bottom:
+        1px solid var(--border);
+
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.atlas-axis-title span {
+    color: var(--text-3);
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.atlas-scroll {
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-color:
+        rgba(255, 255, 255, 0.2)
+        transparent;
+}
+
+.atlas-svg {
+    display: block;
+
+    width: 100%;
+    min-width: 1080px;
+    height: auto;
+
+    background:
+        radial-gradient(
+            circle at 25% 15%,
+            rgba(91, 140, 255, 0.055),
+            transparent 34%
+        ),
+        rgba(4, 6, 10, 0.32);
+}
+
+/* 아틀라스 행 */
+
+.atlas-row-background {
+    fill: transparent;
+}
+
+.atlas-row-background.alternate {
+    fill: rgba(255, 255, 255, 0.016);
+}
+
+.atlas-row-line {
+    stroke:
+        rgba(255, 255, 255, 0.045);
+
+    stroke-width: 1;
+}
+
+.atlas-row-label {
+    fill: #a8afbd;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    pointer-events: none;
+}
+
+/* 아틀라스 시간축 */
+
+.atlas-axis-tick line {
+    stroke:
+        rgba(255, 255, 255, 0.055);
+
+    stroke-width: 1;
+    stroke-dasharray: 3 6;
+}
+
+.atlas-axis-tick text {
+    fill: #70798a;
+
+    font-size: 10px;
+
+    pointer-events: none;
+}
+
+/* 같은 기간 세로 연결선 */
+
+.atlas-family-line {
+    stroke: var(--family-color);
+    stroke-width: 1.2;
+
+    opacity: 0.13;
+
+    transition:
+        opacity 180ms var(--ease),
+        stroke-width 180ms var(--ease);
+}
+
+.atlas-family-line.is-active {
+    stroke-width: 3;
+    opacity: 0.88;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            var(--family-color)
+        );
+}
+
+.atlas-family-line.is-dimmed {
+    opacity: 0.018;
+}
+
+/* MA 노드 */
+
+.atlas-node {
+    cursor: pointer;
+
+    transition:
+        opacity 180ms var(--ease);
+}
+
+.atlas-node-hit-area {
+    fill: transparent;
+}
+
+.atlas-node-circle {
+    fill: var(--node-color);
+
+    stroke:
+        rgba(255, 255, 255, 0.78);
+
+    stroke-width: 1;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            var(--node-color)
+        );
+
+    transform-origin: center;
+
+    transition:
+        r 180ms var(--ease),
+        opacity 180ms var(--ease),
+        filter 180ms var(--ease);
+}
+
+.atlas-node-label {
+    fill: #b7becc;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    paint-order: stroke;
+
+    stroke:
+        rgba(9, 11, 16, 0.95);
+
+    stroke-width: 3px;
+    stroke-linejoin: round;
+
+    pointer-events: none;
+
+    transition:
+        fill 180ms var(--ease),
+        font-size 180ms var(--ease);
+}
+
+.atlas-node:hover .atlas-node-circle,
+.atlas-node:focus .atlas-node-circle,
+.atlas-node.is-active .atlas-node-circle {
+    r: 10;
+
+    stroke: white;
+    stroke-width: 2;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            var(--node-color)
+        );
+}
+
+.atlas-node:hover .atlas-node-label,
+.atlas-node:focus .atlas-node-label,
+.atlas-node.is-active .atlas-node-label {
+    fill: white;
+    font-size: 11px;
+}
+
+.atlas-node.is-active {
+    opacity: 1;
+}
+
+.atlas-node.is-dimmed {
+    opacity: 0.08;
+}
+
+.atlas-node.approximate
+.atlas-node-circle {
+    fill: transparent;
+
+    stroke: var(--node-color);
+    stroke-width: 2;
+    stroke-dasharray: 3 2;
+}
+
+/* 아틀라스 범례 */
+
+.atlas-legend {
+    min-height: 48px;
+    padding: 12px 18px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    color: var(--text-3);
+
+    border-top: 1px solid var(--border);
+
+    font-size: 10px;
+}
+
+.atlas-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 7px
+        rgba(85, 216, 255, 0.7);
+}
+
+.legend-dot.approximate {
+    background: transparent;
+
+    border:
+        1px dashed
+        var(--purple);
+
+    box-shadow: none;
+}
+
+/* 선택한 관계 상세 */
+
+.atlas-family-details {
+    min-height: 180px;
+    margin-top: 18px;
+    padding: 24px;
+}
+
+.atlas-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.atlas-detail-header h2 {
+    margin-bottom: 0;
+
+    font-size: 25px;
+    letter-spacing: -0.035em;
+}
+
+.atlas-family-count {
+    min-width: 92px;
+    padding: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.atlas-family-count strong,
+.atlas-family-count span {
+    display: block;
+}
+
+.atlas-family-count strong {
+    color: var(--cyan);
+    font-size: 24px;
+}
+
+.atlas-family-count span {
+    margin-top: 2px;
+
+    color: var(--text-3);
+
+    font-size: 9px;
+}
+
+.atlas-family-chain {
+    margin-top: 22px;
+
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+
+    overflow-x: auto;
+}
+
+.atlas-family-item {
+    position: relative;
+
+    flex: 0 0 118px;
+    min-height: 90px;
+    padding: 15px 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(91, 140, 255, 0.08),
+            rgba(169, 124, 255, 0.025)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    text-align: center;
+}
+
+.atlas-family-item:not(:last-child)::after {
+    content: "→";
+
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    z-index: 2;
+
+    width: 10px;
+
+    color: var(--text-3);
+
+    font-size: 11px;
+
+    transform:
+        translateY(-50%);
+}
+
+.atlas-family-item span {
+    color: var(--text-2);
+    font-size: 11px;
+}
+
+.atlas-family-item strong {
+    margin-top: 5px;
+
+    color: white;
+    font-size: 19px;
+}
+
+.atlas-family-item small {
+    margin-top: 5px;
+
+    color: var(--orange);
+    font-size: 8px;
+}
+
+.atlas-family-item.approximate {
+    border-style: dashed;
+
+    border-color:
+        rgba(169, 124, 255, 0.35);
+}
+
+.atlas-formula-explanation {
+    margin-top: 18px;
+    padding: 14px 16px;
+
+    color: var(--text-2);
+    background: rgba(0, 0, 0, 0.18);
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 11px;
+    line-height: 1.75;
+}
+
+.atlas-approximation-note {
+    margin: 12px 0 0;
+
+    color: var(--orange);
+    font-size: 10px;
+}
+
+.atlas-detail-empty {
+    min-height: 130px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-2);
+
+    text-align: center;
+}
+
+.atlas-detail-empty strong {
+    margin-bottom: 8px;
+
+    color: white;
+    font-size: 18px;
+}
+
+.atlas-detail-empty p {
+    max-width: 430px;
+    margin-bottom: 0;
+
+    line-height: 1.6;
+}
+
+/* ======================================================
+   축 안내 + 인기 조합 강조
+   ====================================================== */
+
+.atlas-body {
+    display: flex;
+    align-items: stretch;
+}
+
+.atlas-y-caption {
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-3);
+    border-right: 1px solid var(--border);
+
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    writing-mode: vertical-rl;
+}
+
+.atlas-body .atlas-scroll {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 인기 타임프레임 행 라벨 */
+.atlas-row-label.popular {
+    fill: #f4f6fb;
+    font-weight: 800;
+}
+
+/* 비인기 노드는 기본적으로 옅게 */
+.atlas-node.is-minor:not(.is-active):not(.is-dimmed):not(:hover) {
+    opacity: 0.45;
+}
+
+/* 인기 노드는 크고 밝게 */
+.atlas-node.popular .atlas-node-circle {
+    r: 9;
+}
+
+.atlas-node.popular .atlas-node-label {
+    fill: #e9edf5;
+    font-weight: 800;
+}
+
+/* 환산기 인기 MA 버튼 */
+.ma-button.popular {
+    color: #ffd2a1;
+    border-color: rgba(255, 173, 90, 0.45);
+}
+
+.ma-button.popular.active {
+    color: white;
+}

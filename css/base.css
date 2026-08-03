@@ -1,0 +1,128 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #090b10;
+    --surface: #10131a;
+    --surface-2: #161a23;
+    --surface-3: #1d2230;
+
+    --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.16);
+
+    --text: #f4f6fb;
+    --text-2: #a8afbd;
+    --text-3: #70798a;
+
+    --blue: #5b8cff;
+    --blue-2: #7aa2ff;
+    --cyan: #55d8ff;
+    --green: #41d695;
+    --orange: #ffad5a;
+    --red: #ff6b78;
+    --purple: #a97cff;
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --shadow:
+        0 20px 60px rgba(0, 0, 0, 0.32);
+
+    --ease:
+        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+    min-height: 100%;
+    background: var(--bg);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(91, 140, 255, 0.14),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(169, 124, 255, 0.1),
+            transparent 30%
+        ),
+        var(--bg);
+
+    font-family:
+        Inter,
+        Pretendard,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans KR",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+select,
+input {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+code {
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+}
+
+.background-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.022) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.022) 1px,
+            transparent 1px
+        );
+
+    background-size: 36px 36px;
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 80%
+        );
+}

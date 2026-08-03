@@ -1,0 +1,29 @@
+# OS 파일
+.DS_Store
+Thumbs.db
+ehthumbs.db
+# IDE/Editor 설정 파일
+.idea/
+*.iml
+.vscode/
+*.swp
+# 언어/프레임워크 (Python)
+__pycache__/
+*.pyc
+venv/
+env/
+pip-log.txt
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+# 빌드/의존성 폴더 및 패키지 관리자
+node_modules/
+npm-debug.log*
+# 로그 및 임시 파일
+*.log
+logs/
+tmp/
+*.temp
+# 사용자 지정 제외 항목
+docs/
