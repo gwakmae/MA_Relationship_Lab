@@ -121,12 +121,12 @@
     }
 
     .atlas-svg {
-        width: 1080px;
-        min-width: 1080px;
+        width: 1400px;
+        min-width: 1400px;
     }
 
     .atlas-family-details {
-        padding: 18px;
+        padding: 20px;
     }
 
     .atlas-detail-header {
@@ -134,11 +134,11 @@
     }
 
     .atlas-family-count {
-        min-width: 78px;
+        min-width: 88px;
     }
 
     .atlas-family-item {
-        flex-basis: 104px;
+        flex-basis: 124px;
     }
 }
 
@@ -185,7 +185,7 @@
     }
 
     .atlas-intro h2 {
-        font-size: 22px;
+        font-size: 23px;
     }
 
     .atlas-intro > div > p:last-child {
@@ -193,23 +193,29 @@
     }
 
     .atlas-axis-title {
-        padding: 13px 14px;
+        padding: 15px 16px;
     }
 
     .atlas-axis-title span {
         display: none;
     }
 
+    .atlas-y-caption {
+        flex-basis: 34px;
+        font-size: 10px;
+    }
+
     .atlas-legend {
-        gap: 10px;
+        gap: 12px;
+        font-size: 11px;
     }
 
     .atlas-detail-header h2 {
-        font-size: 20px;
+        font-size: 21px;
     }
 
     .atlas-family-count strong {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .atlas-family-chain {

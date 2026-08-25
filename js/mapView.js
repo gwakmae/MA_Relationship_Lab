@@ -5,12 +5,12 @@ MALab.MapView = (() => {
     const core = MALab.Core;
     const store = MALab.Store;
 
-    const SVG_WIDTH = 1320;
-    const LEFT_MARGIN = 112;
-    const RIGHT_MARGIN = 36;
-    const TOP_MARGIN = 72;
-    const ROW_HEIGHT = 50;
-    const BOTTOM_MARGIN = 58;
+    const SVG_WIDTH = 1500;
+    const LEFT_MARGIN = 132;
+    const RIGHT_MARGIN = 56;
+    const TOP_MARGIN = 84;
+    const ROW_HEIGHT = 70;
+    const BOTTOM_MARGIN = 70;
 
     const AXIS_TICKS = [
         5,
@@ -28,7 +28,6 @@ MALab.MapView = (() => {
     let groups = new Map();
     let nodes = [];
     let pinnedDurationKey = null;
-    let defaultDurationKey = null;
 
     function createDurationKey(duration) {
         return String(duration);
@@ -202,14 +201,14 @@ MALab.MapView = (() => {
                     <g class="atlas-axis-tick">
                         <line
                             x1="${x}"
-                            y1="${TOP_MARGIN - 30}"
+                            y1="${TOP_MARGIN - 34}"
                             x2="${x}"
-                            y2="${graphHeight - 28}"
+                            y2="${graphHeight - 32}"
                         ></line>
 
                         <text
                             x="${x}"
-                            y="${TOP_MARGIN - 42}"
+                            y="${TOP_MARGIN - 48}"
                             text-anchor="middle"
                         >
                             ${formatAxisDuration(duration)}
@@ -261,8 +260,8 @@ MALab.MapView = (() => {
                                 atlas-row-label
                                 ${popular ? "popular" : ""}
                             "
-                            x="${LEFT_MARGIN - 18}"
-                            y="${y + 4}"
+                            x="${LEFT_MARGIN - 20}"
+                            y="${y + 5}"
                             text-anchor="end"
                         >
                             ${popular ? "★ " : ""}${timeframe.label}봉
@@ -350,18 +349,18 @@ MALab.MapView = (() => {
                     >
                         <circle
                             class="atlas-node-hit-area"
-                            r="19"
+                            r="26"
                         ></circle>
 
                         <circle
                             class="atlas-node-circle"
-                            r="7"
+                            r="8.5"
                         ></circle>
 
                         <text
                             class="atlas-node-label"
                             x="0"
-                            y="-13"
+                            y="-18"
                             text-anchor="middle"
                         >
                             ${node.period}
@@ -415,6 +414,8 @@ MALab.MapView = (() => {
                     <p>
                         MA 점에 마우스를 올리거나 터치하면
                         동일한 기간을 갖는 관계가 강조됩니다.
+                        점을 클릭하면 관계가 고정되고,
+                        전체 보기 버튼으로 해제할 수 있습니다.
                     </p>
                 </div>
             `;
@@ -649,41 +650,13 @@ MALab.MapView = (() => {
                 pinnedDurationKey = null;
                 applyHighlight(null);
             });
-
-        container
-            .querySelector(
-                "#atlas-example-focus"
-            )
-            .addEventListener("click", () => {
-                pinnedDurationKey =
-                    createDurationKey(600);
-
-                applyHighlight(
-                    pinnedDurationKey
-                );
-            });
     }
 
     function render(container) {
         createGraphData();
 
-        const state = store.getState().map;
-
-        const source =
-            core.getTimeframe(
-                state.sourceTimeframeId
-            );
-
-        defaultDurationKey =
-            createDurationKey(
-                source.minutes *
-                state.sourceMA
-            );
-
-        pinnedDurationKey =
-            groups.has(defaultDurationKey)
-                ? defaultDurationKey
-                : createDurationKey(600);
+        // 기본 상태는 항상 전체 보기입니다.
+        pinnedDurationKey = null;
 
         const graphHeight =
             getGraphHeight();
@@ -703,25 +676,18 @@ MALab.MapView = (() => {
                     <p>
                         모든 타임프레임과 MA가 한 화면에
                         표시됩니다. 점에 마우스를 올리거나
-                        터치하면 해당 관계 전체가 강조됩니다.
+                        터치하면 해당 관계 전체가 강조되고,
+                        클릭하면 관계가 고정됩니다.
                     </p>
                 </div>
 
                 <div class="atlas-actions">
                     <button
-                        id="atlas-example-focus"
+                        id="atlas-clear-focus"
                         class="
                             atlas-action-button
                             primary
                         "
-                        type="button"
-                    >
-                        600분 예시
-                    </button>
-
-                    <button
-                        id="atlas-clear-focus"
-                        class="atlas-action-button"
                         type="button"
                     >
                         전체 보기
@@ -808,7 +774,7 @@ MALab.MapView = (() => {
         `;
 
         bindGraphEvents(container);
-        applyHighlight(pinnedDurationKey);
+        applyHighlight(null);
     }
 
     return Object.freeze({

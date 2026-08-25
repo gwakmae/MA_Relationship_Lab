@@ -489,7 +489,7 @@
    ====================================================== */
 
 .atlas-intro {
-    margin-bottom: 18px;
+    margin-bottom: 24px;
 
     display: flex;
     align-items: flex-end;
@@ -499,10 +499,10 @@
 
 .atlas-intro h2 {
     max-width: 720px;
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 
     font-size:
-        clamp(22px, 3vw, 32px);
+        clamp(24px, 3vw, 34px);
 
     line-height: 1.2;
     letter-spacing: -0.04em;
@@ -513,7 +513,8 @@
 
     color: var(--text-2);
 
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.65;
 }
 
 .atlas-actions {
@@ -524,15 +525,18 @@
 }
 
 .atlas-action-button {
-    min-height: 40px;
-    padding: 0 14px;
+    min-height: 44px;
+    padding: 0 18px;
 
     color: var(--text-2);
     background:
         rgba(255, 255, 255, 0.035);
 
     border: 1px solid var(--border);
-    border-radius: 11px;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 700;
 
     cursor: pointer;
 
@@ -570,7 +574,7 @@
 }
 
 .atlas-axis-title {
-    padding: 17px 20px 13px;
+    padding: 20px 24px 16px;
 
     display: flex;
     align-items: center;
@@ -582,14 +586,14 @@
     border-bottom:
         1px solid var(--border);
 
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 750;
 }
 
 .atlas-axis-title span {
     color: var(--text-3);
 
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
 }
 
@@ -608,7 +612,7 @@
     display: block;
 
     width: 100%;
-    min-width: 1080px;
+    min-width: 1400px;
     height: auto;
 
     background:
@@ -640,7 +644,7 @@
 .atlas-row-label {
     fill: #a8afbd;
 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
 
     pointer-events: none;
@@ -657,9 +661,9 @@
 }
 
 .atlas-axis-tick text {
-    fill: #70798a;
+    fill: #8a93a4;
 
-    font-size: 10px;
+    font-size: 12px;
 
     pointer-events: none;
 }
@@ -668,9 +672,9 @@
 
 .atlas-family-line {
     stroke: var(--family-color);
-    stroke-width: 1.2;
+    stroke-width: 1.6;
 
-    opacity: 0.13;
+    opacity: 0.15;
 
     transition:
         opacity 180ms var(--ease),
@@ -678,18 +682,18 @@
 }
 
 .atlas-family-line.is-active {
-    stroke-width: 3;
-    opacity: 0.88;
+    stroke-width: 3.5;
+    opacity: 0.9;
 
     filter:
         drop-shadow(
-            0 0 5px
+            0 0 6px
             var(--family-color)
         );
 }
 
 .atlas-family-line.is-dimmed {
-    opacity: 0.018;
+    opacity: 0.03;
 }
 
 /* MA 노드 */
@@ -715,7 +719,7 @@
 
     filter:
         drop-shadow(
-            0 0 4px
+            0 0 5px
             var(--node-color)
         );
 
@@ -728,9 +732,9 @@
 }
 
 .atlas-node-label {
-    fill: #b7becc;
+    fill: #c3cad8;
 
-    font-size: 9px;
+    font-size: 11.5px;
     font-weight: 700;
 
     paint-order: stroke;
@@ -738,7 +742,7 @@
     stroke:
         rgba(9, 11, 16, 0.95);
 
-    stroke-width: 3px;
+    stroke-width: 3.5px;
     stroke-linejoin: round;
 
     pointer-events: none;
@@ -751,14 +755,14 @@
 .atlas-node:hover .atlas-node-circle,
 .atlas-node:focus .atlas-node-circle,
 .atlas-node.is-active .atlas-node-circle {
-    r: 10;
+    r: 12;
 
     stroke: white;
     stroke-width: 2;
 
     filter:
         drop-shadow(
-            0 0 10px
+            0 0 12px
             var(--node-color)
         );
 }
@@ -767,7 +771,7 @@
 .atlas-node:focus .atlas-node-label,
 .atlas-node.is-active .atlas-node-label {
     fill: white;
-    font-size: 11px;
+    font-size: 13.5px;
 }
 
 .atlas-node.is-active {
@@ -775,7 +779,7 @@
 }
 
 .atlas-node.is-dimmed {
-    opacity: 0.08;
+    opacity: 0.1;
 }
 
 .atlas-node.approximate
@@ -790,30 +794,30 @@
 /* 아틀라스 범례 */
 
 .atlas-legend {
-    min-height: 48px;
-    padding: 12px 18px;
+    min-height: 56px;
+    padding: 14px 22px;
 
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 24px;
 
     color: var(--text-3);
 
     border-top: 1px solid var(--border);
 
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .atlas-legend span {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
 }
 
 .legend-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
 
     display: inline-block;
 
@@ -839,9 +843,9 @@
 /* 선택한 관계 상세 */
 
 .atlas-family-details {
-    min-height: 180px;
-    margin-top: 18px;
-    padding: 24px;
+    min-height: 200px;
+    margin-top: 20px;
+    padding: 28px;
 }
 
 .atlas-detail-header {
@@ -854,13 +858,13 @@
 .atlas-detail-header h2 {
     margin-bottom: 0;
 
-    font-size: 25px;
+    font-size: 27px;
     letter-spacing: -0.035em;
 }
 
 .atlas-family-count {
-    min-width: 92px;
-    padding: 12px;
+    min-width: 104px;
+    padding: 14px;
 
     background:
         rgba(255, 255, 255, 0.025);
@@ -878,23 +882,23 @@
 
 .atlas-family-count strong {
     color: var(--cyan);
-    font-size: 24px;
+    font-size: 26px;
 }
 
 .atlas-family-count span {
-    margin-top: 2px;
+    margin-top: 3px;
 
     color: var(--text-3);
 
-    font-size: 9px;
+    font-size: 10px;
 }
 
 .atlas-family-chain {
-    margin-top: 22px;
+    margin-top: 24px;
 
     display: flex;
     align-items: stretch;
-    gap: 10px;
+    gap: 12px;
 
     overflow-x: auto;
 }
@@ -902,9 +906,9 @@
 .atlas-family-item {
     position: relative;
 
-    flex: 0 0 118px;
-    min-height: 90px;
-    padding: 15px 12px;
+    flex: 0 0 140px;
+    min-height: 108px;
+    padding: 18px 14px;
 
     display: flex;
     flex-direction: column;
@@ -919,7 +923,7 @@
         );
 
     border: 1px solid var(--border);
-    border-radius: 13px;
+    border-radius: 14px;
 
     text-align: center;
 }
@@ -929,14 +933,14 @@
 
     position: absolute;
     top: 50%;
-    right: -10px;
+    right: -12px;
     z-index: 2;
 
-    width: 10px;
+    width: 12px;
 
     color: var(--text-3);
 
-    font-size: 11px;
+    font-size: 12px;
 
     transform:
         translateY(-50%);
@@ -944,21 +948,21 @@
 
 .atlas-family-item span {
     color: var(--text-2);
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .atlas-family-item strong {
-    margin-top: 5px;
+    margin-top: 6px;
 
     color: white;
-    font-size: 19px;
+    font-size: 22px;
 }
 
 .atlas-family-item small {
-    margin-top: 5px;
+    margin-top: 6px;
 
     color: var(--orange);
-    font-size: 8px;
+    font-size: 10px;
 }
 
 .atlas-family-item.approximate {
@@ -969,8 +973,8 @@
 }
 
 .atlas-formula-explanation {
-    margin-top: 18px;
-    padding: 14px 16px;
+    margin-top: 20px;
+    padding: 16px 18px;
 
     color: var(--text-2);
     background: rgba(0, 0, 0, 0.18);
@@ -983,19 +987,19 @@
         Consolas,
         monospace;
 
-    font-size: 11px;
-    line-height: 1.75;
+    font-size: 12.5px;
+    line-height: 1.8;
 }
 
 .atlas-approximation-note {
-    margin: 12px 0 0;
+    margin: 14px 0 0;
 
     color: var(--orange);
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .atlas-detail-empty {
-    min-height: 130px;
+    min-height: 150px;
 
     display: flex;
     flex-direction: column;
@@ -1008,17 +1012,18 @@
 }
 
 .atlas-detail-empty strong {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 
     color: white;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .atlas-detail-empty p {
-    max-width: 430px;
+    max-width: 460px;
     margin-bottom: 0;
 
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.65;
 }
 
 /* ======================================================
@@ -1031,7 +1036,7 @@
 }
 
 .atlas-y-caption {
-    flex: 0 0 34px;
+    flex: 0 0 46px;
 
     display: flex;
     align-items: center;
@@ -1040,7 +1045,7 @@
     color: var(--text-3);
     border-right: 1px solid var(--border);
 
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.25em;
     writing-mode: vertical-rl;
 }
@@ -1058,12 +1063,12 @@
 
 /* 비인기 노드는 기본적으로 옅게 */
 .atlas-node.is-minor:not(.is-active):not(.is-dimmed):not(:hover) {
-    opacity: 0.45;
+    opacity: 0.5;
 }
 
 /* 인기 노드는 크고 밝게 */
 .atlas-node.popular .atlas-node-circle {
-    r: 9;
+    r: 10.5;
 }
 
 .atlas-node.popular .atlas-node-label {
