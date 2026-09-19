@@ -7,6 +7,7 @@ MALab.Config = Object.freeze({
         5,
         10,
         20,
+        30,
         40,
         50,
         60,
@@ -22,11 +23,14 @@ MALab.Config = Object.freeze({
     // 실전에서 자주 쓰는 MA (강조 대상)
     popularMAs: Object.freeze([
         5,
+        10,
         20,
         50,
         60,
+        100,
         120,
-        200
+        200,
+        240
     ]),
 
     // 실전에서 자주 쓰는 타임프레임 (강조 대상)

@@ -5,12 +5,14 @@ MALab.MapView = (() => {
     const core = MALab.Core;
     const store = MALab.Store;
 
-    const SVG_WIDTH = 1500;
-    const LEFT_MARGIN = 132;
-    const RIGHT_MARGIN = 56;
-    const TOP_MARGIN = 84;
-    const ROW_HEIGHT = 70;
-    const BOTTOM_MARGIN = 70;
+    const SVG_WIDTH = 2100;
+    const LEFT_MARGIN = 44;
+    const RIGHT_MARGIN = 72;
+    const TOP_MARGIN = 92;
+    const ROW_HEIGHT = 76;
+    const BOTTOM_MARGIN = 76;
+
+    const LABEL_COLLISION_GAP = 34;
 
     const AXIS_TICKS = [
         5,
@@ -184,6 +186,39 @@ MALab.MapView = (() => {
                 });
             }
         );
+
+        assignNodeLabelPositions();
+    }
+
+    function assignNodeLabelPositions() {
+        config.timeframes.forEach(timeframe => {
+            const rowNodes = nodes
+                .filter(node => {
+                    return node.timeframe.id === timeframe.id;
+                })
+                .sort((a, b) => a.x - b.x);
+
+            let previousX = Number.NEGATIVE_INFINITY;
+            let clusterIndex = 0;
+
+            rowNodes.forEach(node => {
+                if (
+                    node.x - previousX <
+                    LABEL_COLLISION_GAP
+                ) {
+                    clusterIndex += 1;
+                } else {
+                    clusterIndex = 0;
+                }
+
+                node.labelY =
+                    clusterIndex % 2 === 0
+                        ? -18
+                        : -34;
+
+                previousX = node.x;
+            });
+        });
     }
 
     function renderAxisTicks(graphHeight) {
@@ -225,13 +260,11 @@ MALab.MapView = (() => {
                 const y = getYPosition(index);
                 const rowTop = y - ROW_HEIGHT / 2;
 
-                const popular =
-                    config.popularTimeframes.includes(
-                        timeframe.id
-                    );
-
                 return `
-                    <g class="atlas-row">
+                    <g
+                        class="atlas-row"
+                        data-timeframe="${timeframe.id}"
+                    >
                         <rect
                             class="
                                 atlas-row-background
@@ -254,22 +287,141 @@ MALab.MapView = (() => {
                             x2="${SVG_WIDTH - RIGHT_MARGIN}"
                             y2="${rowTop + ROW_HEIGHT}"
                         ></line>
-
-                        <text
-                            class="
-                                atlas-row-label
-                                ${popular ? "popular" : ""}
-                            "
-                            x="${LEFT_MARGIN - 20}"
-                            y="${y + 5}"
-                            text-anchor="end"
-                        >
-                            ${popular ? "★ " : ""}${timeframe.label}봉
-                        </text>
                     </g>
                 `;
             })
             .join("");
+    }
+
+    function renderTimeframeLabels() {
+        const labels = config.timeframes
+            .map((timeframe, index) => {
+                const popular =
+                    config.popularTimeframes.includes(
+                        timeframe.id
+                    );
+
+                return `
+                    <div
+                        class="
+                            atlas-timeframe-label
+                            ${
+                                index % 2 === 0
+                                    ? "alternate"
+                                    : ""
+                            }
+                            ${popular ? "popular" : ""}
+                        "
+                        data-timeframe="${timeframe.id}"
+                    >
+                        ${popular ? "★ " : ""}
+                        ${timeframe.label}봉
+                    </div>
+                `;
+            })
+            .join("");
+
+        return `
+            <div
+                class="atlas-timeframe-axis"
+                aria-label="타임프레임"
+            >
+                <div class="atlas-timeframe-axis-header">
+                    타임프레임
+                </div>
+
+                ${labels}
+
+                <div
+                    class="atlas-timeframe-axis-footer"
+                    aria-hidden="true"
+                ></div>
+            </div>
+        `;
+    }
+
+    function renderSearchControls() {
+        const state = store.getState().map;
+
+        const timeframeOptions =
+            config.timeframes
+                .map(timeframe => {
+                    const selected =
+                        timeframe.id ===
+                        state.sourceTimeframeId
+                            ? "selected"
+                            : "";
+
+                    return `
+                        <option
+                            value="${timeframe.id}"
+                            ${selected}
+                        >
+                            ${timeframe.label}봉
+                        </option>
+                    `;
+                })
+                .join("");
+
+        const maOptions =
+            config.maPeriods
+                .map(period => {
+                    const selected =
+                        period === state.sourceMA
+                            ? "selected"
+                            : "";
+
+                    return `
+                        <option
+                            value="${period}"
+                            ${selected}
+                        >
+                            ${period}MA
+                        </option>
+                    `;
+                })
+                .join("");
+
+        return `
+            <form
+                id="atlas-search-form"
+                class="atlas-search-form"
+                role="search"
+            >
+                <div class="atlas-search-field">
+                    <label for="atlas-search-timeframe">
+                        타임프레임
+                    </label>
+
+                    <select
+                        id="atlas-search-timeframe"
+                        class="atlas-search-select"
+                    >
+                        ${timeframeOptions}
+                    </select>
+                </div>
+
+                <div class="atlas-search-field">
+                    <label for="atlas-search-ma">
+                        이동평균선
+                    </label>
+
+                    <select
+                        id="atlas-search-ma"
+                        class="atlas-search-select"
+                    >
+                        ${maOptions}
+                    </select>
+                </div>
+
+                <button
+                    class="atlas-search-button"
+                    type="submit"
+                >
+                    찾기
+                </button>
+            </form>
+        `;
     }
 
     function renderFamilyLines() {
@@ -360,7 +512,7 @@ MALab.MapView = (() => {
                         <text
                             class="atlas-node-label"
                             x="0"
-                            y="-18"
+                            y="${node.labelY}"
                             text-anchor="middle"
                         >
                             ${node.period}
@@ -484,12 +636,22 @@ MALab.MapView = (() => {
                     </h2>
                 </div>
 
-                <div class="atlas-family-count">
-                    <strong>
-                        ${exactNodes.length}
-                    </strong>
+                <div class="atlas-detail-actions">
+                    <button
+                        class="atlas-clear-selection"
+                        type="button"
+                        data-clear-atlas-selection
+                    >
+                        선택 해제
+                    </button>
 
-                    <span>정확한 관계</span>
+                    <div class="atlas-family-count">
+                        <strong>
+                            ${exactNodes.length}
+                        </strong>
+
+                        <span>정확한 관계</span>
+                    </div>
                 </div>
             </div>
 
@@ -542,6 +704,23 @@ MALab.MapView = (() => {
                 ".atlas-family-line"
             );
 
+        const rowElements =
+            document.querySelectorAll(
+                ".atlas-row"
+            );
+
+        const timeframeLabelElements =
+            document.querySelectorAll(
+                ".atlas-timeframe-label"
+            );
+
+        const activeTimeframes = new Set(
+            (
+                groups.get(durationKey) ||
+                []
+            ).map(node => node.timeframe.id)
+        );
+
         nodeElements.forEach(element => {
             const sameFamily =
                 Boolean(durationKey) &&
@@ -578,12 +757,50 @@ MALab.MapView = (() => {
             );
         });
 
+        [
+            ...rowElements,
+            ...timeframeLabelElements
+        ].forEach(element => {
+            const sameTimeframe =
+                Boolean(durationKey) &&
+                activeTimeframes.has(
+                    element.dataset.timeframe
+                );
+
+            element.classList.toggle(
+                "is-active",
+                sameTimeframe
+            );
+
+            element.classList.toggle(
+                "is-dimmed",
+                Boolean(durationKey) &&
+                    !sameTimeframe
+            );
+        });
+
         renderFamilyDetails(durationKey);
     }
 
-    function selectNode(element) {
+    function clearSelection() {
+        pinnedDurationKey = null;
+        applyHighlight(null);
+    }
+
+    function selectNode(
+        element,
+        allowToggle = true
+    ) {
         const durationKey =
             element.dataset.duration;
+
+        if (
+            allowToggle &&
+            pinnedDurationKey === durationKey
+        ) {
+            clearSelection();
+            return;
+        }
 
         pinnedDurationKey = durationKey;
 
@@ -598,6 +815,83 @@ MALab.MapView = (() => {
         applyHighlight(durationKey);
     }
 
+    function scrollToNode(element) {
+        const scrollContainer =
+            element.closest(".atlas-scroll");
+
+        if (!scrollContainer) {
+            return;
+        }
+
+        const elementRect =
+            element.getBoundingClientRect();
+
+        const scrollRect =
+            scrollContainer.getBoundingClientRect();
+
+        const targetLeft =
+            scrollContainer.scrollLeft +
+            elementRect.left -
+            scrollRect.left -
+            scrollContainer.clientWidth / 2;
+
+        scrollContainer.scrollTo({
+            left: Math.max(0, targetLeft),
+            behavior: "smooth"
+        });
+
+        const targetTop =
+            window.scrollY +
+            elementRect.top -
+            window.innerHeight / 2;
+
+        window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: "smooth"
+        });
+
+        element.focus({
+            preventScroll: true
+        });
+    }
+
+    function findAndSelectNode(container) {
+        const timeframeId =
+            container.querySelector(
+                "#atlas-search-timeframe"
+            ).value;
+
+        const period =
+            Number(
+                container.querySelector(
+                    "#atlas-search-ma"
+                ).value
+            );
+
+        const element =
+            container.querySelector(
+                `.atlas-node[data-timeframe="${timeframeId}"][data-period="${period}"]`
+            );
+
+        if (!element) {
+            MALab.App.showToast(
+                "해당 MA 노드를 찾을 수 없습니다."
+            );
+
+            return;
+        }
+
+        selectNode(element, false);
+        scrollToNode(element);
+
+        const timeframe =
+            core.getTimeframe(timeframeId);
+
+        MALab.App.showToast(
+            `${timeframe.label}봉 ${period}MA를 선택했습니다.`
+        );
+    }
+
     function bindGraphEvents(container) {
         container
             .querySelectorAll(".atlas-node")
@@ -605,6 +899,10 @@ MALab.MapView = (() => {
                 element.addEventListener(
                     "pointerenter",
                     () => {
+                        if (pinnedDurationKey) {
+                            return;
+                        }
+
                         applyHighlight(
                             element.dataset.duration
                         );
@@ -614,9 +912,11 @@ MALab.MapView = (() => {
                 element.addEventListener(
                     "pointerleave",
                     () => {
-                        applyHighlight(
-                            pinnedDurationKey
-                        );
+                        if (pinnedDurationKey) {
+                            return;
+                        }
+
+                        applyHighlight(null);
                     }
                 );
 
@@ -642,14 +942,33 @@ MALab.MapView = (() => {
                 );
             });
 
+        container.addEventListener(
+            "click",
+            event => {
+                const clearButton =
+                    event.target.closest(
+                        "[data-clear-atlas-selection]"
+                    );
+
+                if (!clearButton) {
+                    return;
+                }
+
+                clearSelection();
+            }
+        );
+
         container
             .querySelector(
-                "#atlas-clear-focus"
+                "#atlas-search-form"
             )
-            .addEventListener("click", () => {
-                pinnedDurationKey = null;
-                applyHighlight(null);
-            });
+            .addEventListener(
+                "submit",
+                event => {
+                    event.preventDefault();
+                    findAndSelectNode(container);
+                }
+            );
     }
 
     function render(container) {
@@ -682,6 +1001,8 @@ MALab.MapView = (() => {
                 </div>
 
                 <div class="atlas-actions">
+                    ${renderSearchControls()}
+
                     <button
                         id="atlas-clear-focus"
                         class="
@@ -689,6 +1010,7 @@ MALab.MapView = (() => {
                             primary
                         "
                         type="button"
+                        data-clear-atlas-selection
                     >
                         전체 보기
                     </button>
@@ -710,15 +1032,15 @@ MALab.MapView = (() => {
                 </div>
 
                 <div class="atlas-body">
-                    <div class="atlas-y-caption">
-                        <span>
-                            Y축(세로) · 타임프레임
-                        </span>
-                    </div>
+                    ${renderTimeframeLabels()}
 
                     <div class="atlas-scroll">
                         <svg
                             class="atlas-svg"
+                            style="
+                                --atlas-width:
+                                ${SVG_WIDTH}px
+                            "
                             viewBox="
                                 0 0
                                 ${SVG_WIDTH}

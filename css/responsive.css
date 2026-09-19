@@ -114,15 +114,30 @@
 
     .atlas-actions {
         margin-top: 17px;
+        justify-content: stretch;
     }
 
-    .atlas-action-button {
+    .atlas-search-form {
+        flex: 1 1 100%;
+    }
+
+    .atlas-search-field {
         flex: 1;
     }
 
+    .atlas-search-select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .atlas-search-button,
+    .atlas-action-button {
+        flex: 0 0 auto;
+    }
+
     .atlas-svg {
-        width: 1400px;
-        min-width: 1400px;
+        width: var(--atlas-width, 2100px);
+        min-width: var(--atlas-width, 2100px);
     }
 
     .atlas-family-details {
@@ -184,10 +199,6 @@
         padding: 18px;
     }
 
-    .atlas-intro h2 {
-        font-size: 23px;
-    }
-
     .atlas-intro > div > p:last-child {
         font-size: 13px;
     }
@@ -200,9 +211,46 @@
         display: none;
     }
 
-    .atlas-y-caption {
-        flex-basis: 34px;
-        font-size: 10px;
+    .atlas-timeframe-axis {
+        flex-basis: 76px;
+    }
+
+    .atlas-timeframe-axis-header {
+        padding-right: 9px;
+        font-size: 9px;
+    }
+
+    .atlas-timeframe-label {
+        padding: 0 9px;
+        font-size: 11px;
+    }
+
+    .atlas-search-form {
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            auto;
+
+        width: 100%;
+    }
+
+    .atlas-search-select {
+        padding-right: 25px;
+        font-size: 12px;
+    }
+
+    .atlas-search-button {
+        padding: 0 13px;
+        font-size: 12px;
+    }
+
+    .atlas-action-button {
+        width: 100%;
+    }
+
+    .atlas-intro h2 {
+        font-size: 23px;
     }
 
     .atlas-legend {
